@@ -8,6 +8,9 @@
  */
 
 #include "exercise2.h"
+#include <stdio.h>
+#include <assert.h>
+#include <stdlib.h>
 
 /* 
  * Sort a singly linked list in-place using insertion sort
@@ -18,7 +21,44 @@
  * Returns pointer to the new head of the sorted list.
  */
 node* isort(node* list) {
-    return NULL; // Placeholder implementation
+
+    assert(list != NULL); //sikrer listen eksisterer
+
+    node* sorted = NULL; //starter med at lave en tom sorteret liste
+    node* current = list; //går gennem listen
+
+    while(current != NULL){
+
+        node* next = current->next; //gemmer den næste node
+
+        //Her vil current indsættes i den sorteret liste
+        if(sorted == NULL || current->data < sorted->data){
+
+            //Her vil det næste tal blive sat forrest, hvis den sorterede liste er tom
+            //eller hvis den aktuelle node (current) er mindre end den første node i den sorterede liste
+            current->next = sorted;
+            sorted = current;
+
+        } else {
+
+            //Find den korrekte placering ellers
+            node* temp = sorted;
+
+            while(temp->next != NULL && temp->next->data<current->data){
+                temp = temp->next;
+            }
+
+            //Indsæt current efter temp i den sortereded liste
+            current->next = temp->next;
+            temp->next=current;
+        }
+
+        current = next; //går videre til den næste node
+
+    }
+
+    return sorted; 
+
 }
 
 /* Helper function to print the list */
