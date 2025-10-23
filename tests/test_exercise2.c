@@ -8,6 +8,41 @@
 #include <stdbool.h>
 #include "../include/exercise2.h"
 
+/* Helper function to create a node */
+node* create_node(int data) {
+    node *new_node = (node*)malloc(sizeof(node));
+    if (!new_node) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+    new_node->data = data;
+    new_node->next = NULL;
+    return new_node;
+}
+
+/* Helper function to free the list */
+void free_list(node* list) {
+    node *current = list;
+    node *next_node;
+
+    while (current != NULL) {
+        next_node = current->next;
+        free(current);
+        current = next_node;
+    }
+}
+
+/* Helper function to print the list (for testing) */
+void print_list(node* list) {
+    node *current = list;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
+
+
 /* Helper function to check if list is sorted */
 bool is_sorted(node* list) {
     if (list == NULL || list->next == NULL) {
