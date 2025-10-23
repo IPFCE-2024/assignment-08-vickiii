@@ -21,8 +21,9 @@ typedef struct node {
  * Sort a singly linked list in-place using insertion sort
  * The list should be sorted from smallest to largest
  * No new nodes should be allocated - only pointers should be changed
+ * Returns pointer to the new head of the sorted list
  */
-void isort(node* list);
+node* isort(node* list);
 
 /* Helper function to create a node */
 node* create_node(int data);
