@@ -63,7 +63,10 @@ bool full(stack *s) {
  * Post-condition: both stacks in the queue are empty
  */
 void init_queue(queue *q) {
-    /* TODO: initialize queue */
+
+    //initialiserer begge stacks i køen - de starter tomme
+    initialize(&q->s1);
+    initialize(&q->s2);
 }
 
 /* 
@@ -72,7 +75,11 @@ void init_queue(queue *q) {
  * x: item to be inserted
  */
 void enqueue(queue *q, int x) {
-    /* TODO: Implement enqueue using ONLY stack operations */
+    if(!full(&q->s1)){ //Tjekker om der er plads på stacken
+        push(&q->s1, x); //Lægger elementet øverst på stack 1
+    } else {
+        printf("The queue is full! Cannot add %d.\n", x);
+    }
 }
 
 /* 
@@ -80,9 +87,22 @@ void enqueue(queue *q, int x) {
  * q: pointer to the queue structure
  */
 int dequeue(queue *q) {
-    /* TODO: Implement dequeue using ONLY stack operations */
     
-    return 0;  // TODO: Replace with actual implementation
+    //hvis begge stacke er tomme, så er køen tom
+    if(empty(&q->s1) && empty(&q->s2)){
+        printf("The queue is empty! Unable to remove element.\n");
+        return -1; //fejl
+    }
+
+    //Hvis stack 2 er tom, flyttes alle elementer fra s1 til s2
+    if(empty(&q->s2)){
+        while(!empty(&q->s1)){
+            int val = pop(&q->s1); //tager det øverste element fra s1
+            push(&q->s2, val); //lægger det på s2
+        }
+    }
+    
+    return pop(&q->s2);  //fjerner og returnerer det øverste element fra s2
 }
 
 /* 
@@ -91,15 +111,18 @@ int dequeue(queue *q) {
  * Returns: true if both stacks are empty, false otherwise
  */
 bool queue_empty(queue *q) {
-    /* TODO: Implement using ONLY stack operations */
-    return false;  // TODO: Replace with actual implementation
+    
+
+    return empty(&q->s1) && empty(&q->s2); //køen er kun tom, hvis begge stacke er
 }
 
 /* 
 * Check if the queue is full
 */
 bool queue_full(queue *q) {
-    /* TODO: Implement using ONLY stack operations */
+    
+    //da stacken er baseret på en linked-list, bliver den normalt ikke "fuld"
+    //medmindre systemet løber tør for hukommelse
     return false;
 }
 
