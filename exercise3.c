@@ -93,7 +93,8 @@ bool empty(const queue *q) {
  * Returns: true if queue is full, false otherwise
  */
 bool full(const queue *q) {
-   
+   //en linked-list-baseret kø bliver normalt ikke "fuld"
+   //ellers er det systemets hukommelse der sætter en grænse
     return false;
 }
 
