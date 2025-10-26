@@ -7,6 +7,9 @@
  */
 
 #include "exercise3.h"
+#include <stdio.h>
+#include <stdlib.h> //for malloc() og free()
+#include <assert.h>
 
 /* 
  * Initialize an empty queue
@@ -15,7 +18,10 @@
  * Post-condition: queue is empty with front and rear set to NULL
  */
 void initialize(queue *q) {
-    /* TODO: Initialize the queue */
+    
+    q->front = NULL; //fronten sættes til NULL, da køen er tom
+    q->rear = NULL; //Bagenden af køen sættes til NULL, da der er ingen elementer
+    
 }
 
 /* 
