@@ -21,7 +21,7 @@ void initialize(queue *q) {
     
     q->front = NULL; //fronten sættes til NULL, da køen er tom
     q->rear = NULL; //Bagenden af køen sættes til NULL, da der er ingen elementer
-    
+
 }
 
 /* 
@@ -33,7 +33,22 @@ void initialize(queue *q) {
  * Post-condition: x is added to the rear of the queue
  */
 void enqueue(queue *q, int x) {
-    /* TODO: Implement enqueue */
+    
+    //Opretter ny node
+    node *newNode = malloc(sizeof(node));
+    assert(newNode != NULL); //det sikrer at hukommelsen bliver allokeret korrekt
+
+    newNode->data = x; //gemmer x i den nye node
+    newNode->next = NULL; //den nye node skal være bagerst -> next = NULL
+
+    //Hvis køen er tom
+    if(q->rear == NULL){
+        q->front = newNode; //front peger på den nye node
+        q->rear = newNode; //rear peger på den nye node
+    } else { //Hvis køen ikke er tom
+        q->rear->next = newNode; //det tidligere bagerste node peger på det nye node
+        q->rear = newNode; //rear flyttes, så den kan pege på den nye
+    }
 }
 
 /* 
@@ -44,8 +59,22 @@ void enqueue(queue *q, int x) {
  * Post-condition: front item is removed and returned
  */
 int dequeue(queue *q) {
-    /* TODO: Implement dequeue */
-    return 0;  
+    
+    assert(q->front != NULL); //sørger for køen ikke er tom, for at kunne fjerne elementer
+
+    node *temp = q->front; //midlertidigt pege på den første node
+    int value = temp->data; //gemmer data fra front
+
+    q->front = q->front->next; //flytter front til det næste element i køen
+
+    //I tilfælde af tom kø efter fjernet element
+    if(q->front == NULL){
+        q->rear = NULL; //rear skal sættes til NULL
+    }
+
+    free(temp); //frigøre hukommelsen for den gamle front
+
+    return value;  //returnerer det fjernede værdi
 }
 
 /* 
@@ -54,8 +83,8 @@ int dequeue(queue *q) {
  * Returns: true if queue is empty, false otherwise
  */
 bool empty(const queue *q) {
-    /* TODO: Implement empty check */
-    return false; 
+    
+    return (q->front == NULL); // tom kø, hvis front == NULL
 }
 
 /* 
@@ -64,7 +93,7 @@ bool empty(const queue *q) {
  * Returns: true if queue is full, false otherwise
  */
 bool full(const queue *q) {
-    /* TODO: Implement full check */
+   
     return false;
 }
 
