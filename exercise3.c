@@ -95,6 +95,8 @@ bool empty(const queue *q) {
 bool full(const queue *q) {
    //en linked-list-baseret kø bliver normalt ikke "fuld"
    //ellers er det systemets hukommelse der sætter en grænse
+
+   (void)q; //ubrugt parameter
     return false;
 }
 
