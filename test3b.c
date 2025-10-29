@@ -33,7 +33,7 @@ int main(){
     assert(x0 == y0); //skal bekræfte x0 kom ud først
     assert(x1 == y1); //skal bekræfte x1 kom ud efter
     assert(empty(&q)); //køen er tom igen
-    printf("Funktion 3 virker yeeees\n");
+    printf("Funktion 3 virker :)))\n");
 
     //Test for fjerde funktion
     //Tilføjer værdier:
@@ -47,7 +47,7 @@ int main(){
     assert(dequeue(&q) == 20); //Fjern den anden værdi
     assert(dequeue(&q) == 30); //Fjern den tredje værdi
     assert(empty(&q)); //Køen skal tømmes igen
-    printf("Funktion 4 & 5 virker, slay queen!");
+    printf("Funktion 4 & 5 virker!");
 
     return 0;
 
